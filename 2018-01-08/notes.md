@@ -17,8 +17,8 @@
 At 10^9 calculations per second (optimistic) a problem with n=10^6 the complexity of:
 
 * `n^3 = (10^6)^3 / 10^9 / 60 / 60 / 24 / 365 = 31.7` years to complete
-* `n^2 = (10^6)^2 / 10^9 / 60 / 60 = 16.7` minutes to complete
-* `n = 10^6 / 10^9 / 60 = 0.001` seconds to complete
+* `n^2 = (10^6)^2 / 10^9 / 60 = 16.7` minutes to complete
+* `n = 10^6 / 10^9 = 0.001` seconds to complete
 
 ## Powers of 2
 
