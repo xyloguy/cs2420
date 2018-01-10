@@ -1,4 +1,4 @@
-# Notes - Jan 01, 2018
+# Notes - Jan 08, 2018
 
 1. Data Structures
 2. Algorithms
