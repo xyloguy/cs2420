@@ -12,32 +12,32 @@ Do this multiple times to verify that each of your sorting algorithms are workin
 """
 
 import random
-
 import time
 
 
-def bubble_sort(nums):
+def bubble_sort(nums, reverse=False):
     nums = nums[:]
     swapped = True
     while swapped:
         swapped = False
         for i in range(1, len(nums)):
             a, b = nums[i - 1: i + 1]
-            if a > b:
+            if (a > b and not reverse) or (b > a and reverse):
                 nums[i] = a
                 nums[i - 1] = b
                 swapped = True
     return nums
 
 
-def shaker_sort(nums):
+def shaker_sort(nums, reverse=False):
     nums = nums[:]
-    swapped = False
-    while not swapped:
+    swapped = True
+    while swapped:
+        swapped = False
         for i in range(0, len(nums) - 1):
             a = nums[i]
             b = nums[i + 1]
-            if a > b:
+            if (a > b and not reverse) or (b > a and reverse):
                 nums[i] = b
                 nums[i + 1] = a
                 swapped = True
@@ -47,10 +47,9 @@ def shaker_sort(nums):
 
         swapped = False
         for i in range(len(nums) - 2, -1, -1):
-            print(i)
             a = nums[i]
             b = nums[i + 1]
-            if a > b:
+            if (a > b and not reverse) or (b > a and reverse):
                 nums[i] = b
                 nums[i + 1] = a
                 swapped = True
@@ -58,11 +57,18 @@ def shaker_sort(nums):
     return nums
 
 
-
-def selection_sort(nums):
+def selection_sort(nums, reverse=False):
     nums = nums[:]
-
-    return nums
+    sorted_nums = []
+    while len(nums) > 0:
+        m = 0
+        for i in range(len(nums)):
+            a = nums[m]
+            b = nums[i]
+            if (a > b and not reverse) or (a < b and reverse) and i != 0:
+                m = i
+        sorted_nums.append(nums.pop(m))
+    return sorted_nums
 
 
 def create_random(n):
@@ -70,32 +76,35 @@ def create_random(n):
 
 
 def main():
-    print(shaker_sort([10,7,8,2,5,4,6,3,1,9]))
-    return
     sort_functions = {
-        'bubble sort  ': bubble_sort,
-        'shaker sort  ': shaker_sort,
-        'selection    ': selection_sort,
+        'bubble sort   ': bubble_sort,
+        'shaker sort   ': shaker_sort,
+        'selection sort': selection_sort,
     }
+
+    reverse = False
 
     total_sorts = 0
     bad_sorts = 0
-    times = {}
+    times = {'python sorted ': []}
     for i in range(10):
-        list_length = random.randint(10, 1000)
+        list_length = random.randint(10, 2500)
         unsorted_list = create_random(list_length)
-        print('List length', list_length)
-        print('unsorted list', unsorted_list)
+        print('List length   ', list_length)
+        print('unsorted list ', unsorted_list)
 
-        sorted_list = sorted(unsorted_list)
-        print('python sorted', sorted_list)
+        start = time.time()
+        sorted_list = sorted(unsorted_list, reverse=reverse)
+        end = time.time()
+        times['python sorted '].append(end-start)
+        print('python sorted ', sorted_list)
 
         print()
 
         for key in sort_functions:
             total_sorts += 1
             start = time.time()
-            function_sorted_list = sort_functions[key](unsorted_list)
+            function_sorted_list = sort_functions[key](unsorted_list, reverse=reverse)
             end = time.time()
             run_time = end - start
             if key in times:
@@ -107,7 +116,7 @@ def main():
             if function_sorted_list != sorted_list:
                 bad_sorts += 1
 
-            print(key, 'OK' if function_sorted_list == sorted_list else 'ERROR')
+            print(key.strip(), 'OK' if function_sorted_list == sorted_list else 'ERROR')
             print('Took', round(run_time, 2), 'seconds')
             print()
 
