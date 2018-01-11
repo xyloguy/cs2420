@@ -31,27 +31,28 @@ def bubble_sort(nums):
 
 
 def shaker_sort(nums):
-    return None
-
     nums = nums[:]
-    swapped = True
-    while swapped:
-        swapped = False
-        for i in range(1, len(nums)):
-            a, b = nums[i - 1: i + 1]
+    swapped = False
+    while not swapped:
+        for i in range(0, len(nums) - 1):
+            a = nums[i]
+            b = nums[i + 1]
             if a > b:
-                nums[i] = a
-                nums[i - 1] = b
+                nums[i] = b
+                nums[i + 1] = a
                 swapped = True
+
         if not swapped:
             break
 
         swapped = False
-        for i in range(len(nums-2), 0, -1):
-            b, a = nums[i - 1: i + 1]
+        for i in range(len(nums) - 2, -1, -1):
+            print(i)
+            a = nums[i]
+            b = nums[i + 1]
             if a > b:
-                nums[i] = a
-                nums[i - 1] = b
+                nums[i] = b
+                nums[i + 1] = a
                 swapped = True
 
     return nums
@@ -69,6 +70,8 @@ def create_random(n):
 
 
 def main():
+    print(shaker_sort([10,7,8,2,5,4,6,3,1,9]))
+    return
     sort_functions = {
         'bubble sort  ': bubble_sort,
         'shaker sort  ': shaker_sort,
