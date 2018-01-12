@@ -32,42 +32,51 @@ def modified_quick_sort(nums, reverse=False):
     # I wasn't sure what "modified" meant, I thought maybe it wanted us to use
     # a median pivot point instead of the first item in the array to be sorted,
     # that is the only difference between my previous quick_sort and this one.
-    if len(nums) >= 3:
-        first = nums[0]
-        middle = nums[len(nums) // 2]
-        last = nums[len(nums)-1]
-        if first < middle:
-            if middle < last:
-                pivot = middle
-            elif first < last:
-                pivot = last
-            else:
-                pivot = first
-        else:
-            if first < last:
-                pivot = first
-            elif middle < last:
-                pivot = last
-            else:
-                pivot = middle
-    else:
-        pivot = nums[0]
+    size = len(nums)
+    if size <= 1:
+        return nums
+
+    # if size >= 3:
+    #     first = nums[0]
+    #     middle = nums[size // 2]
+    #     last = nums[size-1]
+    #     if first < middle:
+    #         if middle < last:
+    #             pivot = middle
+    #         elif first < last:
+    #             pivot = last
+    #         else:
+    #             pivot = first
+    #     else:
+    #         if first < last:
+    #             pivot = first
+    #         elif middle < last:
+    #             pivot = last
+    #         else:
+    #             pivot = middle
+    # else:
+    #     pivot = nums[0]
+
+    middle = size//2
+    first = nums[0]
+    nums[0] = nums[middle]
+    nums[middle] = first
+    pivot = nums[0]
 
     less = []
     equal = []
     greater = []
 
-    if len(nums) > 1:
-        for num in nums:
-            if num < pivot and not reverse or num > pivot and reverse:
-                less.append(num)
-            elif num == pivot:
-                equal.append(num)
-            else:
-                greater.append(num)
-        return quick_sort(less, reverse) + equal + quick_sort(greater, reverse)
-    else:
-        return nums
+
+    for num in nums:
+        if num < pivot and not reverse or num > pivot and reverse:
+            less.append(num)
+        elif num == pivot:
+            equal.append(num)
+        else:
+            greater.append(num)
+    return quick_sort(less, reverse) + equal + quick_sort(greater, reverse)
+
 
 
 def merge_sort(nums, reverse=False):
@@ -98,7 +107,6 @@ def merge_sort(nums, reverse=False):
             nums[k] = b[j]
             j += 1
             k += 1
-
     return nums
 
 
@@ -150,7 +158,7 @@ def main():
     bad_sorts = 0
     times = {'python sorted      ': []}
     for i in range(10):
-        list_length = random.randint(10, 50000)
+        list_length = random.randint(10, 500000)
         unsorted_list = create_random(list_length)
         print('List length:', list_length)
 
