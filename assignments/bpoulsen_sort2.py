@@ -71,40 +71,41 @@ def modified_quick_sort(nums, reverse=False):
 
 
 def merge_sort(nums, reverse=False):
-    # I am not sure I did this right. I thought a merge sort was supposed to be faster
-    # (complexity) than a traditional quick sort. Mine is 3x slower (performance).
-    if len(nums) == 0 or len(nums) == 1:
-        return nums
-    else:
+    if len(nums) > 1:
         middle = len(nums)//2
-        # reverse not working yet, I thought because of how the merge comparisons were
-        # happening below, that it would be ok to just switch the order the lists are
-        # referenced, but that still returns an error at this time.
-        # TODO: look into why the reverse flag is not working.
-        if not reverse:
-            a = merge_sort(nums[:middle], reverse)
-            b = merge_sort(nums[middle:], reverse)
-        else:
-            b = merge_sort(nums[:middle], reverse)
-            a = merge_sort(nums[middle:], reverse)
 
-        # Merge the lists
-        merged = []
-        while len(a) != 0 and len(b) != 0:
-            if a[0] < b[0]:
-                merged.append(a[0])
-                a.remove(a[0])
+        a = nums[:middle]
+        b = nums[middle:]
+        a = merge_sort(a, reverse)
+        b = merge_sort(b, reverse)
+
+        i = 0
+        j = 0
+        k = 0
+        while i < len(a) and j < len(b):
+            if a[i] < b[j] and not reverse or b[j] < a[i] and reverse:
+                nums[k] = a[i]
+                i += 1
             else:
-                merged.append(b[0])
-                b.remove(b[0])
-        if len(a) == 0:
-            merged += b
-        else:
-            merged += a
-        return merged
+                nums[k] = b[j]
+                j += 1
+            k += 1
+        while i < len(a):
+            nums[k] = a[i]
+            i += 1
+            k += 1
+        while j < len(b):
+            nums[k] = b[j]
+            j += 1
+            k += 1
+
+    return nums
 
 
 def hash_sort(nums, reverse=False):
+    if len(nums) <= 1:
+        return nums
+
     smallest = nums[0]
     largest = smallest
     my_hash = {}
@@ -149,7 +150,7 @@ def main():
     bad_sorts = 0
     times = {'python sorted      ': []}
     for i in range(10):
-        list_length = random.randint(10, 500000)
+        list_length = random.randint(10, 50000)
         unsorted_list = create_random(list_length)
         print('List length:', list_length)
 
