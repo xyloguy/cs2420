@@ -16,7 +16,6 @@ import time
 
 
 def bubble_sort(nums, reverse=False):
-    nums = nums[:]
     swapped = True
     while swapped:
         swapped = False
@@ -30,7 +29,6 @@ def bubble_sort(nums, reverse=False):
 
 
 def shaker_sort(nums, reverse=False):
-    nums = nums[:]
     swapped = True
     while swapped:
         swapped = False
@@ -58,17 +56,16 @@ def shaker_sort(nums, reverse=False):
 
 
 def selection_sort(nums, reverse=False):
-    nums = nums[:]
-    sorted_nums = []
-    while len(nums) > 0:
-        m = 0
-        for i in range(len(nums)):
+    for j in range(0, len(nums)):
+        m = j
+        for i in range(j + 1, len(nums)):
             a = nums[m]
             b = nums[i]
-            if (a > b and not reverse) or (a < b and reverse) and i != 0:
+            if (a > b and not reverse) or (a < b and reverse):
                 m = i
-        sorted_nums.append(nums.pop(m))
-    return sorted_nums
+        if m != j:
+            nums[j], nums[m] = nums[m], nums[j]
+    return nums
 
 
 def create_random(n):
@@ -104,7 +101,7 @@ def main():
         for key in sort_functions:
             total_sorts += 1
             start = time.time()
-            function_sorted_list = sort_functions[key](unsorted_list, reverse=reverse)
+            function_sorted_list = sort_functions[key](unsorted_list[:], reverse=reverse)
             end = time.time()
             run_time = end - start
             if key in times:
