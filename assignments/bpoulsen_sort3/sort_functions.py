@@ -81,7 +81,7 @@ def modified_quick_sort(nums, count):
     if size <= 1:
         return nums
 
-    middle = size//2
+    middle = size // 2
     nums[0], nums[middle] = nums[middle], nums[0]
     count.swaps = 1
     pivot = nums[0]
@@ -105,7 +105,7 @@ def modified_quick_sort(nums, count):
 def merge_sort(nums, count):
     count.compares = 1
     if len(nums) > 1:
-        middle = len(nums)//2
+        middle = len(nums) // 2
 
         a = nums[:middle]
         b = nums[middle:]

@@ -1,8 +1,7 @@
-import random
-
 import math
-
+import random
 import sys
+
 from counter import Counter
 from sort_functions import *
 
@@ -16,6 +15,14 @@ def create_mostly_sorted(n):
     nums.sort()
     nums[0], nums[-1] = nums[-1], nums[0]
     return nums
+
+
+def format_powers(n):
+    return '{:02d}'.format(n)
+
+
+def format_log(n):
+    return '{:05.2f}'.format(math.log2(n) if n != 0 else 0)
 
 
 def main():
@@ -32,7 +39,7 @@ def main():
 
     delimiter = ','
 
-    headers = delimiter + delimiter.join([sort.__name__ for sort in sorts]) + '\n'
+    headers = delimiter + delimiter.join([sort.__name__.split('_')[0] for sort in sorts]) + '\n'
 
     mostly_sorted_swaps = headers
     mostly_sorted_compares = headers
@@ -44,10 +51,10 @@ def main():
         mostly_random = create_random(size)
         mostly_sorted = create_mostly_sorted(size)
 
-        mostly_sorted_swaps += '{:02d}'.format(i)
-        mostly_sorted_compares += '{:02d}'.format(i)
-        mostly_random_swaps += '{:02d}'.format(i)
-        mostly_random_compares += '{:02d}'.format(i)
+        mostly_sorted_swaps += format_powers(i)
+        mostly_sorted_compares += format_powers(i)
+        mostly_random_swaps += format_powers(i)
+        mostly_random_compares += format_powers(i)
 
         for sort in sorts:
             mostly_sorted_swaps += delimiter
@@ -60,10 +67,10 @@ def main():
             sort(mostly_random[:], mostly_random_counter)
             sort(mostly_sorted[:], mostly_sorted_counter)
 
-            mostly_sorted_swaps += '{:05.2f}'.format(math.log2(mostly_sorted_counter.swaps) if mostly_sorted_counter.swaps != 0 else 0)
-            mostly_sorted_compares += '{:05.2f}'.format(math.log2(mostly_sorted_counter.compares) if mostly_sorted_counter.compares != 0 else 0)
-            mostly_random_swaps += '{:05.2f}'.format(math.log2(mostly_random_counter.swaps) if mostly_random_counter.swaps != 0 else 0)
-            mostly_random_compares += '{:05.2f}'.format(math.log2(mostly_random_counter.compares) if mostly_random_counter.compares != 0 else 0)
+            mostly_sorted_swaps += format_log(mostly_sorted_counter.swaps)
+            mostly_sorted_compares += format_log(mostly_sorted_counter.compares)
+            mostly_random_swaps += format_log(mostly_random_counter.swaps)
+            mostly_random_compares += format_log(mostly_random_counter.compares)
 
         mostly_sorted_swaps += '\n'
         mostly_sorted_compares += '\n'
@@ -83,6 +90,7 @@ def main():
         f.close()
 
     print('Done')
+
 
 if __name__ == '__main__':
     main()
