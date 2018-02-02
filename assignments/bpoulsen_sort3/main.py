@@ -37,7 +37,7 @@ def main():
         hash_sort,
     ]
 
-    delimiter = '\t'
+    delimiter = ','
 
     headers = delimiter + delimiter.join([sort.__name__.split('_')[0] for sort in sorts]) + '\n'
 
