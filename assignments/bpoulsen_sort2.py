@@ -29,33 +29,9 @@ def quick_sort(nums, reverse=False):
 
 
 def modified_quick_sort(nums, reverse=False):
-    # I wasn't sure what "modified" meant, I thought maybe it wanted us to use
-    # a median pivot point instead of the first item in the array to be sorted,
-    # that is the only difference between my previous quick_sort and this one.
     size = len(nums)
     if size <= 1:
         return nums
-
-    # if size >= 3:
-    #     first = nums[0]
-    #     middle = nums[size // 2]
-    #     last = nums[size-1]
-    #     if first < middle:
-    #         if middle < last:
-    #             pivot = middle
-    #         elif first < last:
-    #             pivot = last
-    #         else:
-    #             pivot = first
-    #     else:
-    #         if first < last:
-    #             pivot = first
-    #         elif middle < last:
-    #             pivot = last
-    #         else:
-    #             pivot = middle
-    # else:
-    #     pivot = nums[0]
 
     middle = size//2
     first = nums[0]
@@ -66,7 +42,6 @@ def modified_quick_sort(nums, reverse=False):
     less = []
     equal = []
     greater = []
-
 
     for num in nums:
         if num < pivot and not reverse or num > pivot and reverse:
