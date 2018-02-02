@@ -37,7 +37,7 @@ def main():
         hash_sort,
     ]
 
-    delimiter = ','
+    delimiter = '\t'
 
     headers = delimiter + delimiter.join([sort.__name__.split('_')[0] for sort in sorts]) + '\n'
 
@@ -89,7 +89,17 @@ def main():
         f.write(files[file])
         f.close()
 
-    print('Done')
+    print('Random Compares')
+    print(mostly_random_compares)
+    print()
+    print('Random Swaps')
+    print(mostly_random_swaps)
+    print()
+    print('Mostly Sorted Compares')
+    print(mostly_sorted_compares)
+    print()
+    print('Mostly Sorted Swaps')
+    print(mostly_sorted_swaps)
 
 
 if __name__ == '__main__':
