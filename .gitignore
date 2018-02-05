@@ -102,3 +102,6 @@ ENV/
 
 *.idea
 .idea/*
+
+._*
+*Names.txt
