@@ -21,7 +21,12 @@ def evaluate_postfix(expression, **kwargs):
             elif token == "*":
                 plus = s.pop() * s.pop()
             elif token == "/":
-                plus = s.pop() / s.pop()
+                a = s.pop()
+                b = s.pop()
+                if b != 0:
+                    plus = a / b
+                else:
+                    plus = 0
 
         if plus is not None:
             s.push(plus)
