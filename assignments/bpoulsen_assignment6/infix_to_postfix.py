@@ -44,3 +44,7 @@ def infix_to_postfix(expression):
 
     # return the postfix expression
     return postfix
+
+
+if __name__ == '__main__':
+    print(infix_to_postfix("x*7/(5-x)"))
