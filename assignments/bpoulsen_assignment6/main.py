@@ -49,11 +49,13 @@ def draw_graph(surface, width, height, scale):
 
 
 def main():
-    scale = 15
-    min_max_x = 15
-    min_max_y = 15
+    scale = 10
+    min_max_x = 20
+    min_max_y = 20
     width = min_max_x * 2 * scale
     height = min_max_y * 2 * scale
+
+    pygame.init()
 
     while True:
         points = []
@@ -62,16 +64,17 @@ def main():
         postfix = infix_to_postfix(expression)
         print('POSTFIX expression:', postfix)
 
-        pygame.init()
         surface = pygame.display.set_mode((width, height))
         pygame.display.set_caption('Graphing Calculator')
         draw_graph(surface, width, height, scale)
 
-        for x in range(-min_max_x, min_max_x + 1):
+        x = -min_max_x
+        while x < min_max_x:
             y = evaluate_postfix(postfix, x=x)
             draw_x = round(x * scale + width // 2)
             draw_y = round(-y * scale + height // 2)
             points.append((draw_x, draw_y))
+            x += scale / 100
         pygame.draw.lines(surface, (255, 0, 0), False, points)
 
         done = False
@@ -79,11 +82,12 @@ def main():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     done = True
-            pygame.display.flip()
-        pygame.quit()
+            if not done:
+                pygame.display.flip()
 
         x = input('Would like to graph another? [y/n]: ')
         if x.lower() == 'n':
+            pygame.quit()
             break
 
 
