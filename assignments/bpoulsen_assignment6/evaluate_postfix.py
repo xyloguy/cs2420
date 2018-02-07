@@ -44,3 +44,4 @@ if __name__ == '__main__':
     print(evaluate_postfix("53+"))
     print(evaluate_postfix("xx*x*25*/", x=10))
     print(evaluate_postfix("53*"))
+    print(evaluate_postfix("AB-C-", A=10, B=7, C=1))
