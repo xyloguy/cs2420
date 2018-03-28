@@ -75,7 +75,7 @@ def main():
             draw_y = round(-y * scale + height // 2)
             points.append((draw_x, draw_y))
             x += scale / 100
-        pygame.draw.lines(surface, (255, 0, 0), False, points)
+        pygame.draw.aalines(surface, (255, 0, 0), False, points)
 
         done = False
         while not done:

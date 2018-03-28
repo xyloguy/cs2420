@@ -25,6 +25,7 @@ class Student:
 def read_names(students):
     print('READING NAMES')
     f = open('InsertNames.txt', 'r')
+    t = 0
     start = time.time()
     for line in f:
         last, first, ssn, email, age = line.split()
@@ -38,7 +39,10 @@ def read_names(students):
         if skip:
             continue
         students.append(s)
+        t += 1
     end = time.time()
+
+    print(t, 'records created.')
     print('Time: {:04f}'.format(end - start))
     f.close()
     print()
@@ -52,8 +56,9 @@ def traverse_names(students):
     for student in students:
         total += int(student)
         count += 1
-    avg_age = total/count
+    avg_age = total / count
     end = time.time()
+    print(count, 'records read')
     print('Average Age: {:04f}'.format(avg_age))
     print('Time: {:04f}'.format(end - start))
     print()
@@ -62,6 +67,7 @@ def traverse_names(students):
 def delete_names(students):
     print('DELETING NAMES')
     f = open('DeleteNames.txt', 'r')
+    t = 0
     start = time.time()
     for line in f:
         ssn = line.strip()
@@ -70,12 +76,14 @@ def delete_names(students):
             student = students[i]
             if student.ssn == ssn:
                 del students[i]
+                t += 1
                 deleted = True
                 break
         if deleted:
             continue
         print(ssn, 'not found')
     end = time.time()
+    print(t, 'records deleted')
     print('Time: {:04f}'.format(end - start))
     f.close()
     print()
@@ -101,6 +109,7 @@ def retrieve_names(students):
         print(ssn, 'not found')
     avg_age = total / count
     end = time.time()
+    print(count, 'records retrieved')
     print('Average Age: {:04f}'.format(avg_age))
     print('Time: {:04f}'.format(end - start))
     f.close()

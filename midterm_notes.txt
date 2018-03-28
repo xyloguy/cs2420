@@ -1,0 +1,76 @@
+1. Log base 2 of. 130,000,000
+A: 27
+
+
+
+2. Log base 4 of 1,000,000
+A: 10 -- (half of powers of 2)
+
+
+
+3. Password must be 9 characters, what is the complexity?
+- first 3 lower case letter
+- next 3 lower or uppercase
+- last 3 0-9
+A: 26^3 * 52^3 * 10^3
+
+
+
+4. What is Big O analysis?
+A: Big O analysis is the study of how work increases as problem size increases.
+
+
+
+5. When is Big O analysis NOT important?
+A: When you are dealing with small data samples.
+
+
+
+6. Which Big O category
+for N times
+    for N times
+        Do N^2 work
+        Do N^3 work
+A: N^5
+
+
+
+7. List Big O categories and problems
+C - Addition
+log N - Binary Search
+N - Max Sub Sequence
+N^2 - Multiplication, Towers of Hanoi
+N^3 - Max Sub Sequence Naive
+2^N - SAT
+10^N - Factoring (not np complete)
+N! - Traveling Sales Man
+
+
+
+8. What happens with the quick sort after one pass?
+
+
+
+9. Big of different sorting algorithms
+Expected, Worst, Best
+
+
+
+10. Bottleneck is where the worst largest Big O is.
+
+
+
+11. What happens if you make code all faster except the bottleneck 1000 times faster how much faster will your code be.
+A: unnoticeable
+
+
+
+12. Why is it more likely that Factoring might be solved in polynomial time that SAT?
+A: it is not NP Complete
+
+
+
+Won't make: quick sort, merge sort, infix_to_postfix, evaluate_postfix
+
+
+

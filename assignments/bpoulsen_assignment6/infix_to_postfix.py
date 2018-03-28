@@ -3,7 +3,7 @@ from stack import Stack
 
 def infix_to_postfix(expression):
     # set the precedence of the different operators
-    precedence = {"*": 3, "/": 3, "+": 2, "-": 2, "(": 1}
+    precedence = {"^": 4, "*": 3, "/": 3, "+": 2, "-": 2, "(": 1}
 
     # create a stack to track the operators
     operator_stack = Stack()
@@ -47,4 +47,4 @@ def infix_to_postfix(expression):
 
 
 if __name__ == '__main__':
-    print(infix_to_postfix("x*7/(5-x)"))
+    print(infix_to_postfix("x*7/(5-x)^2"))
