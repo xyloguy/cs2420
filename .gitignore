@@ -104,4 +104,5 @@ ENV/
 .idea/*
 
 ._*
-*Names.txt
+*Medium.txt
+*Big.txt
