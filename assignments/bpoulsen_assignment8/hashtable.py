@@ -38,6 +38,11 @@ class HashTable:
                 index = 0
         self.array[index] = item
 
+    def exists(self, item):
+        index = self.__index(item)
+        array_item = self.array[index]
+        return not array_item and array_item is not None and int(array_item) == int(item)
+
     def retrieve(self, item):
         index = self.__index(item)
         array_item = self.array[index]
@@ -63,7 +68,7 @@ class HashTable:
         if array_item is None:
             return False
 
-        self.array[index] = None
+        self.array[index] = False
         return True
 
     def __iter__(self):

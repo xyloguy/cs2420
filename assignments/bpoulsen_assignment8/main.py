@@ -97,7 +97,7 @@ def retrieve_names(students, size):
 
 
 def main():
-    size = 'Big'
+    size = ''
 
     s = 30000
     if size == 'Medium':
