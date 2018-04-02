@@ -99,12 +99,12 @@ def retrieve_names(students, size):
 def main():
     size = ''
 
-    s = 30000
-    if size == 'Medium':
-        s = 300000
-    elif size == 'Big':
+    if size == 'Big':
         s = 3000000
+    elif size == 'Medium':
+        s = 300000
     else:
+        s = 30000
         size = ''
 
     start = time.time()
